@@ -1,20 +1,22 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { DistanciaModule } from './distancia/distancia.module';
-import { ResistenciasComponent } from './resistencias/resistencias.component';
-import { FormsModule } from '@angular/forms';
 import { ResistenciasModule } from './resistencias/resistencias.module';
+import { CineModule } from './cine/cine.module';
+import { MenuComponent } from './menu/menu.component';
+import { AppRoutingModule } from './app.routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
+    MenuComponent,
   ],
   imports: [
     DistanciaModule,
-    ResistenciasModule
+    ResistenciasModule,
+    CineModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

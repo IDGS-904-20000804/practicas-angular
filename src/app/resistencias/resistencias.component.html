@@ -5,21 +5,21 @@
             <label for="color1">Color de la Resistencia 1</label>
             <select class="form-control" id="color1" name="color1" [(ngModel)]="color1">
                 <option selected>Selecciona una resistencia</option>
-                <option *ngFor="let color of colores" [value]="color.valor">{{ color.nombre }} </option>
+                <option *ngFor="let color of colores"  [style.background-color]="color.colorHexa" [style.color]="color.textColor" [value]="color.valor">{{ color.nombre }} </option>
             </select>
         </div>
         <div class="form-group">
             <label for="color2">Color de la Resistencia 2</label>
             <select class="form-control" id="color2" name="color2" [(ngModel)]="color2">
                 <option selected>Selecciona una resistencia</option>
-                <option *ngFor="let color of colores" [value]="color.valor">{{ color.nombre }}</option>
+                <option *ngFor="let color of colores"  [style.background-color]="color.colorHexa" [style.color]="color.textColor" [value]="color.valor">{{ color.nombre }}</option>
             </select>
         </div>
         <div class="form-group">
             <label for="color3">Color de la Resistencia 3</label>
             <select class="form-control" id="color3" name="color3" [(ngModel)]="color3">
                 <option selected>Selecciona una resistencia</option>
-                <option *ngFor="let color of colores" [value]="color.valor">{{ color.nombre }}</option>
+                <option *ngFor="let color of colores"  [style.background-color]="color.colorHexa" [style.color]="color.textColor" [value]="color.valor">{{ color.nombre }}</option>
             </select>
         </div>
         <div class="form-group">
@@ -35,8 +35,30 @@
         </div>
         <button type="button" class="btn btn-primary" (click)="calcular()">Calcular</button>
     </form>
-
-    <div class="mt-3">{{ resultado }}</div>
-    <div class="mt-3">{{ resultadoSuperior }}</div>
-    <div class="mt-3">{{ resultadoInferior }}</div>
+    <div *ngIf="tieneResultado">
+        <table class="table-light col-12">
+            <thead>
+                <tr>
+                  <th scope="col">Banda1</th>
+                  <th scope="col">Banda2</th>
+                  <th scope="col">Banda3</th>
+                  <th scope="col">Tolerancia</th>
+                  <th scope="col">Valor esperado</th>
+                  <th scope="col">Valor mayor</th>
+                  <th scope="col">Valor menor</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                    <td [style.background-color]="rBanda1.color" [style.color]="rBanda1.textColor">{{ rBanda1.nombre }}</td>
+                    <td [style.background-color]="rBanda2.color" [style.color]="rBanda2.textColor">{{ rBanda2.nombre }}</td>
+                    <td [style.background-color]="rBanda3.color" [style.color]="rBanda3.textColor">{{ rBanda3.nombre }}</td>
+                    <td [style.background-color]="rTolerancia.color" [style.color]="rTolerancia.textColor">{{ rTolerancia.nombre }}</td>
+                    <td>{{ resultado }}</td>
+                    <td>{{ resultadoSuperior }}</td>
+                    <td>{{ resultadoInferior }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
