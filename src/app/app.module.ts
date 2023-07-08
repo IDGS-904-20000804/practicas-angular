@@ -6,6 +6,7 @@ import { ResistenciasModule } from './resistencias/resistencias.module';
 import { CineModule } from './cine/cine.module';
 import { MenuComponent } from './menu/menu.component';
 import { AppRoutingModule } from './app.routing.module';
+import { PizzasModule } from './pizzas/pizzas.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { AppRoutingModule } from './app.routing.module';
     DistanciaModule,
     ResistenciasModule,
     CineModule,
-    AppRoutingModule
+    AppRoutingModule,
+    PizzasModule
   ],
   providers: [],
   bootstrap: [AppComponent]

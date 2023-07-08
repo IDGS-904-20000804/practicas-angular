@@ -1,0 +1,132 @@
+<p>Fill the next form to buy a pizza/s:</p>
+<hr />
+
+<div class="row">
+  <form (ngSubmit)="doPurchase()" class="col-3">
+    <div class="form-horizontal">
+      <div class="form-group">
+        <label for="nameClient" class="control-label col-md-2">Client</label>
+        <div class="col-md-10">
+          <input id="nameClient" name="nameClient" class="form-control" [(ngModel)]="nameClient" required />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="addressClient" class="control-label col-md-2">Address</label>
+        <div class="col-md-10">
+          <input id="addressClient" name="addressClient" class="form-control" [(ngModel)]="addressClient" required />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="phoneClient" class="control-label col-md-2">Phone</label>
+        <div class="col-md-10">
+          <input id="phoneClient" name="phoneClient" class="form-control" [(ngModel)]="phoneClient" required />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="total" class="control-label col-md-2">Total</label>
+        <div class="col-md-10">
+          <input id="total" name="total" class="form-control bg-light" readonly value="{{getTotal(pizzas)}}" [(ngModel)]="total" required />
+        </div>
+      </div>
+      <br />
+      <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+          <button type="submit" class="btn btn-success">Buy</button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+
+  <div class="col-9">
+    <form (ngSubmit)="addPizza()" class="form-horizontal">
+      
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <label class="control-label col-md-2">Ingredients</label>
+            <div class="col-10">
+              <div class="form-check" *ngFor="let ingredient of listIngredients; let i = index">
+                <input type="checkbox" class="form-check-input" [(ngModel)]="ingredient.check" [name]="ingredient.name" [value]="ingredient.price" required>
+                <label class="form-check-label">{{ ingredient.name }}</label>
+                <label class="form-check-label">(${{ ingredient.price }})</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-md-2">Sizes</label>
+            <div class="col-md-10">
+              <div class="form-check">
+                <input type="radio" class="form-check-input" [(ngModel)]="size" name="size" value="200"  [checked]="newPurchase" required>
+                <label class="form-check-label">B</label>
+                <label class="form-check-label">($200)</label>
+              </div>
+              <div class="form-check">
+                <input type="radio" class="form-check-input" [(ngModel)]="size" name="size" value="150"  [checked]="newPurchase" required>
+                <label class="form-check-label">M</label>
+                <label class="form-check-label">($150)</label>
+              </div>
+              <div class="form-check">
+                <input type="radio" class="form-check-input" [(ngModel)]="size" name="size" value="100"  [checked]="newPurchase">
+                <label class="form-check-label">S</label>
+                <label class="form-check-label">($100)</label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="totalPizza" class="control-label col-md-2">Total pizzas</label>
+            <div class="col-md-10">
+              <input id="totalPizza" name="totalPizza" class="form-control" [(ngModel)]="totalPizza" required />
+            </div>
+          </div>
+          <button type="submit" class="btn btn-success">Add pizza</button>
+        </div>
+        <div class="col-6">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" class="text-center">Ingredients</th>
+                <th scope="col" class="text-center">Size</th>
+                <th scope="col" class="text-center">Total of pizzas</th>
+                <th scope="col" class="text-center">Subtotal</th>
+                <th scope="col" class="text-center">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let pizza of pizzas; let i = index">
+                <td class="text-center">{{ formatIngredients(pizza.ingredients) }}</td>
+                <td class="text-center">{{ pizza.size.name }}</td>
+                <td class="text-center">{{ pizza.total }}</td>
+                <td class="text-center">{{ getSubtotal(pizza.ingredients, pizza.size, pizza.total) }}</td>
+                <td class="text-center"><button class="btn btn-danger" type="button" (click)="deleteProduct(i)">Delete</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </form>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col" class="text-center">Name</th>
+        <th scope="col" class="text-center">Address</th>
+        <th scope="col" class="text-center">Phone</th>
+        <th scope="col" class="text-center">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let purchase of purchases">
+        <td class="text-center">{{ purchase.nameClient }}</td>
+        <td class="text-center">{{ purchase.addressClient }}</td>
+        <td class="text-center">{{ purchase.phoneClient }}</td>
+        <td class="text-center">{{ purchase.total }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div>
+  Total:
+  <span>{{callculateTotalPurchases()}}</span>
+</div>
